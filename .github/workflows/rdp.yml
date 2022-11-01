@@ -4,19 +4,26 @@ on: [push, workflow_dispatch]
 
 jobs:
 build:
-runs-on: windows-latest
-
+	runs-on: windows-latest
 steps:
 - name: DOWNLOADING
-run: Invoke-WebRequest https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-windows-amd64.zip -OutFile ngrok.zip
+run: Invoke-WebRequest https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-windows-
+
+amd64.zip -OutFile ngrok.zip
 - name: EXTRACT
 run: Expand-Archive ngrok.zip
 - name: AUTENTIFIKASI
-run: .\ngrok\ngrok.exe authoken 2GwqCVEIxTTE8vcDnimr9nkhmQW_7HzhawipcFqqsFRFHi3mR
+run: .\ngrok\ngrok.exe authoken 2FTGVsMPQHUJVFMNZkyG99oq91j_3gJdfwPYM8Nrm7s3ufJiC
 - name: ENABLE TS
-run: Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\TerminalServer'-name "fDenyTSConnections" -Value 0
+run: Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\TerminalServer'-
+
+name "fDenyTSConnections" -Value 0
 -run: Enable-NetFirewallRule -DisplayGroup "Remote Sesktop"
--run: Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\TerminalServer'\WinStations\DRP-Tcp' -name "UserAuthentication" -Value 1
--run: Set-LocalUser -Name "admin" -Password (ConvertTo-SecureString - AsPlainText "admin1" -Force)
+-run: Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control
+
+\TerminalServer'\WinStations\DRP-Tcp' -name "UserAuthentication" -Value 1
+-run: Set-LocalUser -Name "ponny" -Password (ConvertTo-SecureString - AsPlainText 
+
+"Ponny442318" -Force)
 -name: DONE!
 run: .\ngrok\ngrok.exe tcp 3389
